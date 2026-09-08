@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack Matrix | 8-Semester ERP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-main">
+                <h1>EduTrack <span>Matrix ERP</span></h1>
+                <div class="header-controls">
+                    <span id="syncStatus" class="status-badge">Synced</span>
+                    <button id="themeToggle" class="theme-btn">☀️ Light Mode</button>
+                </div>
+            </div>
+            <p>Institutional Grade Student Lifecycle & 8-Semester Analytics Platform</p>
+        </header>
+
+        <main class="dashboard-grid">
+            <section class="form-card">
+                <h3 id="formTitle">Register Student</h3>
+                <form id="studentForm" onsubmit="event.preventDefault();">
+                    <input type="hidden" id="editIndex" value="-1">
+                    
+                    <div class="form-control">
+                        <input type="text" id="stuName" placeholder="Student Name" autocomplete="off">
+                    </div>
+                    
+                    <div class="form-control">
+                        <input type="text" id="stuID" placeholder="Roll Number (Unique Primary Key)">
+                    </div>
+                    
+                    <div class="form-control">
+                        <input type="text" id="stuEmail" placeholder="College Email">
+                    </div>
+                    
+                    <div class="form-control">
+                        <select id="stuDept">
+                            <option value="CSE">CSE</option>
+                            <option value="AI&DS">AI&DS</option>
+                            <option value="ECE">ECE</option>
+                            <option value="IT">IT</option>
+                            <option value="MECH">MECH</option>
+                        </select>
+                    </div>
+                    
+                    <button type="button" id="addBtn">Save Student Record</button>
+                </form>
+            </section>
+
+            <section class="content-card">
+                <div class="tab-navigation">
+                    <button class="tab-btn active" data-tab="studentsTab">📁 Student Registry</button>
+                    <button class="tab-btn" data-tab="marksTab">📊 1-8 Sem Marks Entry</button>
+                    <button class="tab-btn" data-tab="analyticsTab">🏆 Merit Toppers Board</button>
+                </div>
+
+                <hr class="tab-divider">
+
+                <div id="studentsTab" class="tab-content active">
+                    <div class="table-header">
+                        <h3>Active Profiles</h3>
+                        <input type="text" id="searchBox" placeholder="🔍 Dynamic Search Profile...">
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Roll No</th>
+                                    <th>Dept</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentList"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="marksTab" class="tab-content">
+                    <h3>Academic Performance Matrix (Sem 1 - 8)</h3>
+                    <p class="tab-desc">Select a student and semester to inject or update academic grade records.</p>
+                    
+                    <div class="marks-management-grid">
+                        <div class="dropdown-row">
+                            <select id="marksStudentSelect">
+                                <option value="">-- Choose Student Profile --</option>
+                            </select>
+                            
+                            <select id="semesterSelect">
+                                <option value="sem1">Semester 1</option>
+                                <option value="sem2">Semester 2</option>
+                                <option value="sem3">Semester 3</option>
+                                <option value="sem4">Semester 4</option>
+                                <option value="sem5">Semester 5</option>
+                                <option value="sem6">Semester 6</option>
+                                <option value="sem7">Semester 7</option>
+                                <option value="sem8">Semester 8</option>
+                            </select>
+                        </div>
+                        
+                        <div class="marks-inputs-row">
+                            <input type="number" id="gpaInput" placeholder="Enter GPA (0.00 - 10.00)" min="0" max="10" step="0.01">
+                            <button type="button" id="saveMarksBtn" class="action-btn-primary">Update Grade Data</button>
+                        </div>
+                    </div>
+
+                    <div class="table-wrapper" style="margin-top: 20px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student Details</th>
+                                    <th>S1</th>
+                                    <th>S2</th>
+                                    <th>S3</th>
+                                    <th>S4</th>
+                                    <th>S5</th>
+                                    <th>S6</th>
+                                    <th>S7</th>
+                                    <th>S8</th>
+                                    <th style="color: var(--accent-gold);">CGPA</th>
+                                </tr>
+                            </thead>
+                            <tbody id="marksDisplayList"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="analyticsTab" class="tab-content">
+                    <div class="analytics-header">
+                        <h3>🏆 Institutional Merit Leaderboard (Top 5 Overall)</h3>
+                        <p>Real-time analytics sorting engine processing top performance nodes across 8 semesters.</p>
+                    </div>
+
+                    <div class="leaderboard-wrapper" id="leaderboardContainer"></div>
+
+                    <div class="analytics-bar">
+                        <div class="stat-box">Total Strength: <span id="totalCount">0</span></div>
+                        <div class="stat-box">CSE Allocation: <span id="cseCount">0</span></div>
+                        <div class="stat-box">Campus Average CGPA: <span id="avgCgpa">0.00</span></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+    <script src="script.js"></script>
+</body>
+</html>
